@@ -14,18 +14,18 @@
             <form id="quiz-form">
                 <div class="question">
                     <label for="question">Question:</label>
-                    <input type="text" id="question" name="question">
+                    <input type="text" id="question" name="question" required>
                 </div>
                 <div class="answers">
                     <label>Answers:</label>
-                    <input type="text" class="answer" name="answer1">
-                    <input type="text" class="answer" name="answer2">
-                    <input type="text" class="answer" name="answer3">
-                    <input type="text" class="answer" name="answer4">
+                    <input type="text" class="answer" name="answer1" required>
+                    <input type="text" class="answer" name="answer2" required>
+                    <input type="text" class="answer" name="answer3" required>
+                    <input type="text" class="answer" name="answer4" required>
                 </div>
                 <div class="correct-answer">
                     <label for="correct">Correct Answer (1-4):</label>
-                    <input type="number" id="correct" name="correct" min="1" max="4">
+                    <input type="number" id="correct" name="correct" min="1" max="4" required>
                 </div>
                 <button type="submit">Add Question</button>
             </form>
@@ -40,10 +40,12 @@
 
         <div id="take-quiz" style="display:none;">
             <h2>Take Quiz</h2>
-            <div id="questions-container">
-                <!-- Quiz questions will be appended here -->
-            </div>
-            <button id="submit-quiz">Submit Quiz</button>
+            <form id="quiz-take-form">
+                <div id="questions-container">
+                    <!-- Quiz questions will be appended here -->
+                </div>
+                <button type="submit">Submit Quiz</button>
+            </form>
         </div>
 
         <div id="result" style="display:none;">

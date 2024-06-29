@@ -1,4 +1,5 @@
 let quizzes = [];
+let currentQuizIndex = null;
 
 document.getElementById('quiz-form').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -29,6 +30,7 @@ function displayQuizzes() {
 }
 
 function startQuiz(index) {
+    currentQuizIndex = index;
     const quiz = quizzes[index];
     const questionsContainer = document.getElementById('questions-container');
     questionsContainer.innerHTML = '';
@@ -42,20 +44,22 @@ function startQuiz(index) {
     document.getElementById('create-quiz').style.display = 'none';
     document.getElementById('quiz-list').style.display = 'none';
     document.getElementById('take-quiz').style.display = 'block';
-
-    document.getElementById('submit-quiz').addEventListener('click', function () {
-        const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-        const scoreElem = document.getElementById('score');
-        if (selectedAnswer) {
-            const score = parseInt(selectedAnswer.value) === quiz.correct ? 1 : 0;
-            scoreElem.textContent = `You scored ${score}/1`;
-        } else {
-            scoreElem.textContent = 'Please select an answer.';
-        }
-        document.getElementById('take-quiz').style.display = 'none';
-        document.getElementById('result').style.display = 'block';
-    });
 }
+
+document.getElementById('quiz-take-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const quiz = quizzes[currentQuizIndex];
+    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+    const scoreElem = document.getElementById('score');
+    if (selectedAnswer) {
+        const score = parseInt(selectedAnswer.value) === quiz.correct ? 1 : 0;
+        scoreElem.textContent = `You scored ${score}/1`;
+    } else {
+        scoreElem.textContent = 'Please select an answer.';
+    }
+    document.getElementById('take-quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+});
 
 document.getElementById('retake-quiz').addEventListener('click', function () {
     document.getElementById('create-quiz').style.display = 'block';
